@@ -67,30 +67,77 @@ def task3_1ReverseGuessing(n):
             continue
 
 
-def task1TextAnalysis():
-    f = open("C:\\Users\\User\\Desktop\\УЧЕБА\\2 курс\\IAD\\files_for_fun\\fun.txt", 'r', encoding='utf-8')
+def task1TextAnalysis(path):
+    f = open(path, 'r', encoding='utf-8')
     word_collection = dict()
     buf = ""
+    word_count = 0
     for line in f:
         i = 0
-        while (i < len(line)):
+        while i < len(line):
             if line[i].isalpha():
-                while (line[i].isalpha()):
+                while line[i].isalpha():
                     buf += line[i]
                     i += 1
+                    if i == len(line):
+                        break
+                buf = buf.lower()
                 if buf in word_collection:
                     word_collection[buf] += 1
                 else:
                     word_collection[buf] = 1
+                word_count = word_count + 1
                 buf = ""
             i += 1
-    print(word_collection)
+    print("Text contain", word_count, "words")
+    # print(word_collection)
+    print("WORDS RATE:")
+    for i in range(1, 101):
+        if not bool(word_collection):
+            break
+        max_value = 0
+        key_buf = ""
+        for key in word_collection:
+            if word_collection[key] >= max_value:
+                max_value = word_collection[key]
+                key_buf = key
+        print(i, ">>>", key_buf, word_collection[key_buf])
+        del word_collection[key_buf]
+    f.close()
+
+
+def task1_3ReverseSentences(path, path_reverse):
+    f = open(path, 'r', encoding='utf-8')
+    fr = open(path_reverse, 'w', encoding='utf-8')
+    words_buf = []
+    buf = ""
+    for line in f:
+        i = 0
+        while i < len(line):
+            if line[i].isalpha():
+                while line[i].isalpha():
+                    buf += line[i]
+                    i += 1
+                    if i == len(line):
+                        break
+                words_buf.append(buf)
+                buf = ""
+            if line[i] == '.' or line[i] == '!' or line[i] == '?' or line[i] == '\n':
+                for j in reversed(range(len(words_buf))):
+                    fr.write(words_buf[j])
+                    fr.write(" ")
+                fr.write(line[i])
+                words_buf = []
+            i += 1
+    f.close()
+    fr.close()
 
 
 # TASKS
 # print(task2(1000))
 # task3Guessing(10)
 # task3_1ReverseGuessing(100)
+# task1TextAnalysis("C:\\Users\\User\\Desktop\\УЧЕБА\\2 курс\\IAD\\files_for_fun\\Cold.txt")
 
-
-task1TextAnalysis()
+task1_3ReverseSentences("C:\\Users\\User\\Desktop\\УЧЕБА\\2 курс\\IAD\\files_for_fun\\Salt.txt",
+                        "C:\\Users\\User\\Desktop\\УЧЕБА\\2 курс\\IAD\\files_for_fun\\reverse.txt")
