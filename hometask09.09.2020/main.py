@@ -1,6 +1,5 @@
 import random
 
-
 def task2(n):
     max_iter = 0
     count = 0
@@ -68,9 +67,10 @@ def task3_1ReverseGuessing(n):
 
 
 def task1TextAnalysis():
-    f = open("C:\\Users\\User\\Desktop\\УЧЕБА\\2 курс\\IAD\\files_for_fun\\fun.txt", 'r', encoding='utf-8')
+    f = open("D:\\repos\\Python-Exercices\\hometask09.09.2020\\Cold.txt", 'r', encoding='utf-8')
     word_collection = dict()
     buf = ""
+    word_count = 0
     for line in f:
         i = 0
         while (i < len(line)):
@@ -78,19 +78,30 @@ def task1TextAnalysis():
                 while (line[i].isalpha()):
                     buf += line[i]
                     i += 1
+                buf = buf.lower()
                 if buf in word_collection:
                     word_collection[buf] += 1
                 else:
                     word_collection[buf] = 1
+                word_count = word_count + 1
                 buf = ""
             i += 1
-    print(word_collection)
+    print("Text contain", word_count, "words")
+    # print(word_collection)
+
+    for i in range(1, 101):
+        max_value = 0
+        key_buf = ""
+        for key in word_collection:
+            if word_collection[key] >= max_value:
+                max_value = word_collection[key]
+                key_buf = key
+        print(i, ">>>", key_buf, word_collection[key_buf])
+        del word_collection[key_buf]
 
 
 # TASKS
 # print(task2(1000))
 # task3Guessing(10)
 # task3_1ReverseGuessing(100)
-
-
 task1TextAnalysis()
