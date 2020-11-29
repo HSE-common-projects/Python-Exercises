@@ -53,7 +53,7 @@ def add(book):
     if len(ab) > 0:
         print("I found Abonent with same name and surname. What should I do? Input the number")
         response = input(
-            "\"1\"---> delete old record and add new record\n\"2\"---> change name and surname of new record\n\"3\"---> adort addition")
+            "\"1\"---> delete old record and add new record\n\"2\"---> change name and surname of new record\n\"3\"---> adort addition\n>>>")
         if response == '1':
             book.remove(ab[0])
             book.append(Abonent(surname + ';' + name + ';' + p_number + ';' + birth_date))
@@ -198,7 +198,7 @@ def birthinm(book):
     for el in book:
         if not el.age() == -1:
             if isInTimeInterval(30,el.birth_date):
-                print(str(el))
+                print(el.surname+" "+el.name)
                 flag = 1
     if flag == 0:
         print("No birthdays in next 30 days")
@@ -228,16 +228,16 @@ if __name__ == '__main__':
             book.append(Abonent(line))
 
         commands_list = ["This is the list of commands for the smart phonebook:\n",
-                         "!print ---> this commans prints all records in the phonebook\n",
-                         "!add ---> this command adds new record to the phonebook\n",
-                         "!del ---> this command deletes record\n",
-                         "!find ---> \n",
-                         "!edit ---> \n",
-                         "!age ---> \n",
-                         "!birth --->\n",
-                         "!agelme ---> \n",
-                         "!birthinm ---> \n",
-                         "!quit ---> this command exits the phonebook and saves changes\n"]
+                         "!print ---> prints all records in the phonebook\n",
+                         "!add ---> adds new record to the phonebook\n",
+                         "!del ---> deletes record\n",
+                         "!find ---> prints records matching the specified parameters\n",
+                         "!edit ---> changes information about the selected record\n",
+                         "!age ---> prints the age of the selected record\n",
+                         "!birth ---> prints all records with the selected date of birth (day and month)\n",
+                         "!agelme ---> (age less\more\equal) prints all records with age less\more\equal then selected age\n",
+                         "!birthinm ---> (birth in this month) prints all records with birth date in next 30 days\n",
+                         "!quit ---> exits the phonebook and saves changes\n"]
         print("Smart phonebook greets you!")
         print(*commands_list)
         while (True):

@@ -76,13 +76,13 @@ def printBook(arr):
 
 def editing(book, i, surname="-", name="-", pnumb="-", date="-"):
     if surname != "-":
-        book[i].surname = surname
+        book[i].setsurname(surname)
     if name != "-":
-        book[i].name = name
+        book[i].setname(name)
     if pnumb != "-":
-        book[i].phone_number = pnumb
+        book[i].setphonenumber(pnumb)
     if date != "-":
-        book[i].birth_date = date
+        book[i].setphonenumber(date)
 
 
 def ageComparison(book, criterion, N):
